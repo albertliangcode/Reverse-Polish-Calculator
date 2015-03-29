@@ -4,7 +4,7 @@
 * 3/28/15
 * Albert Liang
 *
-* This program generates a LIFO buffer where signed ints can be inputted.
+* This program generates a LIFO buffer where signed floats can be inputted.
 * When the user inputs an operator, the last two inputs are popped out for
 * the operation. After the operation is finished, the result is pushed back
 * onto the buffer. This allows for an easy implementation with a console.
@@ -21,23 +21,46 @@
 * Framebuffer console.
 **/
 
-#define MAX_SIZE 64
+#define MAX_SIZE 8
 
-// use a struct instead? This way you keep buffer and size packaged together?
-int* init()
-{
-    int buf[64];
-    size = 0;
+float stringToFloat( s* ) {
+    float ans;
+    return ans;
 }
 
-void eval(*buf,size)
-{
-
-}
-
-//Just for Testing right now - will add .h file and remove notmain() later
+//Just for Testing right now - will add .h file and change name later
 void notmain()
 {
+    float* buf[MAX_SIZE];
+    size = 0;
 
+    while(True) {
+        input = "";  //Get input from console?
+	if( size > 1) {
+	    if( input == '+' ) {
+		buf[size-2] = buf[size-1] + buf[size-2];
+		size--;
+		continue;
+	    } else if( input == '-' ) {
+		buf[size-2] = buf[size-1] - buf[size-2];
+		size--;
+		continue;
+	    } else if( input == '*' ) {
+		buf[size-2] = buf[size-1] * buf[size-2];
+		size--;
+		continue;
+	    } else if( input == '/' ) {
+		if( buf[size-2] == 0 ) { throw "Divide by Zero"; }
+		buf[size-2] = buf[size-1] / buf[size-2];
+		size--;
+		continue;
+	    } else {
+	    }
+	}
+	if( /*input is a number &&*/ size < MAX_SIZE ) {
+	    buf[size] = input; //input: convert string to float
+	    size++;
+	}
+    }
 }
 
